@@ -23,17 +23,18 @@ tol = abs(input('Enter the allowed error:'));
 n = input('Enter the maximum number of iterations :');
 %initializing the value of k and matrix X
 k=1;
-X= zeros(n+1,3);
-x0= R(1,1); x1= R(1,2); x_disp= x0; err = x1-x0;
+X = zeros(n+1,3);
+x0 = R(1,1); x1= R(1,2); x_disp= x0; err = x1-x0;
 
 % iteration loop
-while k <=n && abs(err) > tol 
+while k <= n && abs(err) > tol 
 x = x1 - (x1-x0)/( feval(f,x1)-feval(f,x0))*feval(f,x1);
+
 if feval(f , x0) * feval(f , x) == 0
 
 return
 else
-if feval(f,x0) * feval(f,x) <0
+if feval(f,x0) * feval(f,x) < 0
 err = x - x1;
 x1 = x;
 x_disp=x1;
@@ -45,6 +46,9 @@ x_disp = x0;
 X(k,2) = x0;
 end 
 end 
+% accelerated scheme
+if k > 2
+	X(k,2) = X(k,2) - ((X(k,2)-X(k-1,2))**2)/(X(k,2)+X(k-2,2)-2*X(k-1,2))
 % storing values in the form of matrix
 X(k,1) = k;
 X(k,3) = abs(err);
