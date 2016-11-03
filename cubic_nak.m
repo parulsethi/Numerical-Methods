@@ -18,7 +18,7 @@ dl = du;
 du(1) = du(1) - hi(1)^2 / hi(2);
 dl(n-3) = dl(n-3) - hi(n-1)^2 / hi(n-2);
 
-temp = tridiagonal ( dl, dd, du, ri );
+temp = tridiagonal( dl, dd, du, ri );
 
 c = zeros ( n,1 );
 d = c;   b = c;
